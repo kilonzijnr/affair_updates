@@ -1,3 +1,4 @@
+from typing import SupportsRound
 import urllib.request, json
 from .models import Sources, Articles
 
@@ -28,8 +29,25 @@ def get_sources():
 
         Sources_results = None
 
-        if get_sources_response["sources"]
+        if get_sources_response["sources"]:
             Sources_results_list = get_sources_response["sources"]
             Sources_results = process_results_sources(Sources_results_list)
     return Sources_results
+
+def process_result_sources(sources_list):
+    """
+    A function to process the sources response and turn into list of objects
+    """
+    sources_results = []
+    for sources_item in sources_list:
+        id = sources_item.get("id")
+        name = sources_item.get("name")
+        description = sources_item.get("description")
+        url =sources_item.get("url")
+
+        sources_object = Sources(id, name, description, url)
+
+        sources_results.append(sources_object)
+    
+    return sources_results
 
