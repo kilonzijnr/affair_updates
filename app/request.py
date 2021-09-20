@@ -16,4 +16,20 @@ def config_request(app):
     sources_base_url = app.config["SOURCES_API_BASE_URL"]
     articles_base_url = app.config["ARTICLES_API_BASE_URL"]
 
+def get_sources():
+    """
+    gets json responses from the api.
+    """
+    get_sources_url = sources_base_url.format(api_key)
+
+    with urllib.request.urlopen(get_sources_url) as url:
+        get_sources_data = url.read()
+        get_sources_response = json.loads(get_sources_data)
+
+        Sources_results = None
+
+        if get_sources_response["sources"]
+            Sources_results_list = get_sources_response["sources"]
+            Sources_results = process_results_sources(Sources_results_list)
+    return Sources_results
 
